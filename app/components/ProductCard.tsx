@@ -9,7 +9,17 @@ import { Link } from "@/i18n/navigation";
 
 export default function ProductCard({ product }: { product: Product }) {
   const t = useTranslations("ProductCard");
-  const { add } = useCart();
+  const { lines, add, setQty, remove } = useCart();
+
+  const cartQty = lines.find((l) => l.product._id === product._id)?.quantity ?? 0;
+
+  const increment = () =>
+    cartQty === 0 ? add(product, 1) : setQty(product._id, cartQty + 1);
+
+  const decrement = () => {
+    if (cartQty <= 1) remove(product._id);
+    else setQty(product._id, cartQty - 1);
+  };
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-secondary/60 bg-card transition-shadow hover:shadow-lg">
@@ -28,7 +38,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <div className="relative flex flex-1 flex-col p-5">
         <button
-          onClick={() => add(product)}
+          onClick={increment}
           aria-label={t("addToCart", { name: product.name })}
           className="absolute -top-6 right-5 flex h-11 w-11 items-center justify-center rounded-full bg-primary-dark text-background shadow-md transition-colors hover:bg-primary"
         >
@@ -48,9 +58,31 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.key_ingredients.join(" · ")}
         </p>
 
-        <span className="mt-4 text-lg font-semibold text-foreground">
-          {formatPrice(product.price)}
-        </span>
+        <div className="mt-4 flex items-center justify-between">
+          <span className="text-lg font-semibold text-foreground">
+            {formatPrice(product.price)}
+          </span>
+          {cartQty > 0 && (
+            <div className="flex items-center gap-1 rounded-full border border-secondary">
+              <button
+                onClick={decrement}
+                className="px-2.5 py-1 text-foreground/60 hover:text-foreground"
+              >
+                −
+              </button>
+              <span className="min-w-[1.25rem] text-center text-sm font-semibold text-foreground">
+                {cartQty}
+              </span>
+              <button
+                onClick={increment}
+                disabled={cartQty >= product.stock}
+                className="px-2.5 py-1 text-foreground/60 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                +
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

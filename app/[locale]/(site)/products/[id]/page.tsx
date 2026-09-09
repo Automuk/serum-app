@@ -18,12 +18,10 @@ export default function ProductDetail({
   const t = useTranslations("ProductDetail");
   const tType = useTranslations("SerumTypes");
   const { id } = use(params);
-  const { add } = useCart();
+  const { lines, add, setQty, remove } = useCart();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [qty, setQty] = useState(1);
-  const [added, setAdded] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -58,10 +56,17 @@ export default function ProductDetail({
   }
 
   const handleAdd = () => {
-    add(product, qty);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
+    add(product, 1);
   };
+
+  const cartQty = lines.find((l) => l.product._id === product._id)?.quantity ?? 0;
+
+  const decrement = () => {
+    if (cartQty <= 1) remove(product._id);
+    else setQty(product._id, cartQty - 1);
+  };
+
+  const increment = () => setQty(product._id, cartQty + 1);
 
   return (
     <div>
@@ -134,28 +139,32 @@ export default function ProductDetail({
             </div>
 
             <div className="mt-8 flex items-center gap-3">
-              <div className="flex items-center rounded-full border border-secondary">
+              {cartQty > 0 ? (
+                <div className="flex flex-1 items-center justify-between rounded-full border border-secondary">
+                  <button
+                    onClick={decrement}
+                    className="px-5 py-3 text-foreground/60 hover:text-foreground"
+                  >
+                    −
+                  </button>
+                  <span className="text-sm font-semibold text-foreground">{cartQty}</span>
+                  <button
+                    onClick={increment}
+                    disabled={cartQty >= product.stock}
+                    className="px-5 py-3 text-foreground/60 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    +
+                  </button>
+                </div>
+              ) : (
                 <button
-                  onClick={() => setQty((q) => Math.max(1, q - 1))}
-                  className="px-4 py-2 text-foreground/60 hover:text-foreground"
+                  onClick={handleAdd}
+                  disabled={product.stock <= 0}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-dark py-3 text-sm font-semibold text-background transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  −
+                  {t("addToCart", { price: formatPrice(product.price) })}
                 </button>
-                <span className="w-8 text-center">{qty}</span>
-                <button
-                  onClick={() => setQty((q) => q + 1)}
-                  className="px-4 py-2 text-foreground/60 hover:text-foreground"
-                >
-                  +
-                </button>
-              </div>
-              <button
-                onClick={handleAdd}
-                disabled={product.stock <= 0}
-                className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-dark py-3 text-sm font-semibold text-background transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-40"
-              >
-                {added ? t("added") : t("addToCart", { price: formatPrice(product.price * qty) })}
-              </button>
+              )}
             </div>
 
             <div className="mt-10 flex flex-col gap-8">
