@@ -1,0 +1,172 @@
+{
+  "Metadata": {
+    "title": "LUMERA — Serum Skincare",
+    "description": "Targeted serums formulated for visible results."
+  },
+  "AnnouncementBar": {
+    "message": "Free shipping on all orders over 250 zł"
+  },
+  "Navbar": {
+    "shop": "Shop",
+    "skincare": "Skincare",
+    "viewAllSerums": "View all serums",
+    "search": "Search",
+    "searchPlaceholder": "Search serums, ingredients…",
+    "closeSearch": "Close search",
+    "noResults": "No serums match \"{query}\".",
+    "cart": "Cart",
+    "language": "Language"
+  },
+  "Hero": {
+    "titleStart": "Serums that feel like",
+    "titleEmphasis": "you.",
+    "subtitle": "Clean, effective formulas for healthy, radiant skin — every drop backed by clinical actives.",
+    "cta": "Shop Now"
+  },
+  "StorySection": {
+    "title": "Beauty in simplicity.",
+    "body": "LUMERA was created with a simple belief: less is more. We craft minimalist skincare using clean, high-quality ingredients that support your skin's natural glow — no fillers, no fuss.",
+    "cta": "Learn More"
+  },
+  "FeaturedProducts": {
+    "title": "Featured Products",
+    "subtitle": "Targeted serums formulated for visible results.",
+    "viewAll": "View all"
+  },
+  "RelatedProducts": {
+    "title": "You May Also Like"
+  },
+  "ProductCard": {
+    "addToCart": "Add {name} to cart"
+  },
+  "Footer": {
+    "tagline": "Minimal ingredients. Maximum glow.",
+    "shop": "Shop",
+    "allProducts": "All Products",
+    "bestSellers": "Best Sellers",
+    "newArrivals": "New Arrivals",
+    "trending": "Trending",
+    "skincare": "Skincare",
+    "about": "About",
+    "ourStory": "Our Story",
+    "ingredients": "Ingredients",
+    "sustainability": "Sustainability",
+    "press": "Press",
+    "careers": "Careers",
+    "newsletterTitle": "Stay in the glow",
+    "newsletterBody": "Get 10% off your first order and hear about new arrivals first.",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "copyright": "© 2026 LUMERA. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "shippingReturns": "Shipping & Returns"
+  },
+  "ShopPage": {
+    "breadcrumb": "Home / Shop",
+    "title": "Shop All Serums",
+    "subtitle": "Clean, effective formulas made with intentional ingredients to support your skin's natural glow."
+  },
+  "ShopGrid": {
+    "category": "Category",
+    "sortFeatured": "Featured",
+    "sortPriceLowHigh": "Price: Low to High",
+    "sortPriceHighLow": "Price: High to Low",
+    "sortNameAz": "Name: A–Z",
+    "results": "{count, plural, one {# result} other {# results}}",
+    "gridView": "Grid view",
+    "listView": "List view",
+    "loadError": "Couldn't load products: {error}. Make sure the backend is running at {url}.",
+    "noResults": "No serums found.",
+    "previousPage": "Previous page",
+    "nextPage": "Next page"
+  },
+  "ProductDetail": {
+    "home": "Home",
+    "shop": "Shop",
+    "cleanIngredients": "Clean Ingredients",
+    "crueltyFree": "Cruelty Free",
+    "dermatologistTested": "Dermatologist Tested",
+    "size": "Size",
+    "inStock": "{count} in stock",
+    "outOfStock": "Out of stock",
+    "ingredients": "Ingredients",
+    "howToUse": "How to Use",
+    "howToUseBody": "Apply 2–3 drops to clean, dry skin morning and night before moisturizer. Follow with SPF during the day.",
+    "added": "Added ✓",
+    "addToCart": "Add to Cart · {price}",
+    "backToShop": "Back to shop",
+    "notFound": "Product not found."
+  },
+  "CartPage": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "subtitle": "Review your items and proceed to checkout.",
+    "trustClean": "Clean & Conscious",
+    "trustCleanSub": "Thoughtfully made",
+    "trustDermatologist": "Dermatologist Tested",
+    "trustDermatologistSub": "Safe for your skin",
+    "trustSecure": "Secure Checkout",
+    "trustSecureSub": "Your data is protected",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal ({count} items)",
+    "shipping": "Shipping",
+    "free": "Free",
+    "estimatedTotal": "Estimated Total",
+    "promoPlaceholder": "Enter promo code",
+    "apply": "Apply",
+    "checkout": "Checkout · {price}",
+    "remove": "Remove {name}"
+  },
+  "SerumTypes": {
+    "Brightening": "Brightening",
+    "Hydrating": "Hydrating",
+    "Acne Control": "Acne Control",
+    "Barrier Care": "Barrier Care",
+    "Anti-Aging": "Anti-Aging",
+    "Dark Spot Care": "Dark Spot Care",
+    "Soothing": "Soothing",
+    "Firming": "Firming",
+    "Pore Care": "Pore Care",
+    "Antioxidant": "Antioxidant"
+  },
+  "CheckoutPage": {
+    "stepCart": "Cart",
+    "stepShipping": "Shipping",
+    "stepPayment": "Payment",
+    "contactInformation": "Contact Information",
+    "emailPlaceholder": "you@example.com",
+    "newsOptIn": "Email me with news and offers from LUMERA",
+    "shippingAddress": "Shipping Address",
+    "fullNamePlaceholder": "Full name",
+    "phonePlaceholder": "Phone (optional)",
+    "line1Placeholder": "Address line 1",
+    "line2Placeholder": "Address line 2 (optional)",
+    "cityPlaceholder": "City",
+    "statePlaceholder": "State/Province",
+    "postalCodePlaceholder": "ZIP/Postal code",
+    "countryPlaceholder": "Country",
+    "continueToPayment": "Continue to Payment",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "payOnline": "Pay Online — coming soon",
+    "back": "Back",
+    "placingOrder": "Placing order…",
+    "placeOrder": "Place Order · {price}",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal ({count} items)",
+    "shipping": "Shipping",
+    "free": "Free",
+    "total": "Total",
+    "trustClean": "Thoughtfully made with safe ingredients.",
+    "trustSecure": "Your data is protected with encryption.",
+    "trustReturns": "30-day easy returns.",
+    "orderConfirmedTitle": "Order confirmed",
+    "orderConfirmedBody": "Thank you! Your order {orderId} totalling {total} is being processed.",
+    "continueShoppingCta": "Continue shopping",
+    "cartEmpty": "Your cart is empty.",
+    "browseSerums": "Browse serums",
+    "checkoutFailed": "Checkout failed"
+  }
+}

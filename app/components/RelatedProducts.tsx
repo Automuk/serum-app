@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getProducts, type Product } from "@/app/lib/api";
 import ProductCard from "@/app/components/ProductCard";
 
@@ -11,6 +12,7 @@ export default function RelatedProducts({
   serumType: string;
   excludeId: string;
 }) {
+  const t = useTranslations("RelatedProducts");
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function RelatedProducts({
   return (
     <section className="mx-auto max-w-[1420px] px-6 py-16">
       <h2 className="font-heading mb-8 text-center text-2xl font-semibold tracking-tight text-foreground">
-        You May Also Like
+        {t("title")}
       </h2>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (

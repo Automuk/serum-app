@@ -1,0 +1,172 @@
+{
+  "Metadata": {
+    "title": "LUMERA — Serum do Skóry",
+    "description": "Serum celowane zaprojektowane dla widocznych efektów."
+  },
+  "AnnouncementBar": {
+    "message": "Darmowa dostawa przy zamówieniach powyżej 250 zł"
+  },
+  "Navbar": {
+    "shop": "Sklep",
+    "skincare": "Pielęgnacja",
+    "viewAllSerums": "Zobacz wszystkie serum",
+    "search": "Szukaj",
+    "searchPlaceholder": "Szukaj serum, składników…",
+    "closeSearch": "Zamknij wyszukiwanie",
+    "noResults": "Brak serum pasujących do \"{query}\".",
+    "cart": "Koszyk",
+    "language": "Język"
+  },
+  "Hero": {
+    "titleStart": "Serum, które czuje się jak",
+    "titleEmphasis": "ty.",
+    "subtitle": "Czyste, skuteczne formuły dla zdrowej, promiennej skóry — każda kropla poparta klinicznymi składnikami aktywnymi.",
+    "cta": "Kupuj Teraz"
+  },
+  "StorySection": {
+    "title": "Piękno w prostocie.",
+    "body": "LUMERA powstała z prostego przekonania: mniej znaczy więcej. Tworzymy minimalistyczną pielęgnację skóry z czystych, wysokiej jakości składników, które wspierają naturalny blask Twojej skóry — bez wypełniaczy, bez zbędnego zamieszania.",
+    "cta": "Dowiedz się więcej"
+  },
+  "FeaturedProducts": {
+    "title": "Polecane Produkty",
+    "subtitle": "Serum celowane zaprojektowane dla widocznych efektów.",
+    "viewAll": "Zobacz wszystkie"
+  },
+  "RelatedProducts": {
+    "title": "Może Ci się spodobać"
+  },
+  "ProductCard": {
+    "addToCart": "Dodaj {name} do koszyka"
+  },
+  "Footer": {
+    "tagline": "Minimum składników. Maksimum blasku.",
+    "shop": "Sklep",
+    "allProducts": "Wszystkie Produkty",
+    "bestSellers": "Bestsellery",
+    "newArrivals": "Nowości",
+    "trending": "Popularne",
+    "skincare": "Pielęgnacja",
+    "about": "O nas",
+    "ourStory": "Nasza Historia",
+    "ingredients": "Składniki",
+    "sustainability": "Zrównoważony rozwój",
+    "press": "Prasa",
+    "careers": "Kariera",
+    "newsletterTitle": "Bądź na bieżąco",
+    "newsletterBody": "Otrzymaj 10% zniżki na pierwsze zamówienie i dowiedz się o nowościach jako pierwszy.",
+    "emailPlaceholder": "Wpisz swój e-mail",
+    "subscribe": "Zapisz się",
+    "copyright": "© 2026 LUMERA. Wszelkie prawa zastrzeżone.",
+    "privacyPolicy": "Polityka Prywatności",
+    "termsOfService": "Regulamin",
+    "shippingReturns": "Dostawa i Zwroty"
+  },
+  "ShopPage": {
+    "breadcrumb": "Strona główna / Sklep",
+    "title": "Wszystkie Serum",
+    "subtitle": "Czyste, skuteczne formuły stworzone z przemyślanych składników, wspierające naturalny blask Twojej skóry."
+  },
+  "ShopGrid": {
+    "category": "Kategoria",
+    "sortFeatured": "Polecane",
+    "sortPriceLowHigh": "Cena: od najniższej",
+    "sortPriceHighLow": "Cena: od najwyższej",
+    "sortNameAz": "Nazwa: A–Z",
+    "results": "{count, plural, one {# wynik} few {# wyniki} other {# wyników}}",
+    "gridView": "Widok siatki",
+    "listView": "Widok listy",
+    "loadError": "Nie udało się wczytać produktów: {error}. Upewnij się, że backend działa pod adresem {url}.",
+    "noResults": "Nie znaleziono serum.",
+    "previousPage": "Poprzednia strona",
+    "nextPage": "Następna strona"
+  },
+  "ProductDetail": {
+    "home": "Strona główna",
+    "shop": "Sklep",
+    "cleanIngredients": "Czyste Składniki",
+    "crueltyFree": "Nietestowane na Zwierzętach",
+    "dermatologistTested": "Przetestowane Dermatologicznie",
+    "size": "Rozmiar",
+    "inStock": "{count} w magazynie",
+    "outOfStock": "Brak w magazynie",
+    "ingredients": "Składniki",
+    "howToUse": "Jak Stosować",
+    "howToUseBody": "Nałóż 2–3 krople na czystą, suchą skórę rano i wieczorem przed kremem nawilżającym. W ciągu dnia stosuj z filtrem SPF.",
+    "added": "Dodano ✓",
+    "addToCart": "Dodaj do Koszyka · {price}",
+    "backToShop": "Powrót do sklepu",
+    "notFound": "Nie znaleziono produktu."
+  },
+  "CartPage": {
+    "title": "Twój Koszyk",
+    "empty": "Twój koszyk jest pusty.",
+    "continueShopping": "Kontynuuj Zakupy",
+    "subtitle": "Sprawdź swoje produkty i przejdź do finalizacji zamówienia.",
+    "trustClean": "Czyste i Świadome",
+    "trustCleanSub": "Wykonane z troską",
+    "trustDermatologist": "Przetestowane Dermatologicznie",
+    "trustDermatologistSub": "Bezpieczne dla skóry",
+    "trustSecure": "Bezpieczna Płatność",
+    "trustSecureSub": "Twoje dane są chronione",
+    "orderSummary": "Podsumowanie Zamówienia",
+    "subtotal": "Suma częściowa ({count} szt.)",
+    "shipping": "Dostawa",
+    "free": "Za darmo",
+    "estimatedTotal": "Szacowana Suma",
+    "promoPlaceholder": "Wpisz kod promocyjny",
+    "apply": "Zastosuj",
+    "checkout": "Do kasy · {price}",
+    "remove": "Usuń {name}"
+  },
+  "SerumTypes": {
+    "Brightening": "Rozjaśniające",
+    "Hydrating": "Nawilżające",
+    "Acne Control": "Przeciwtrądzikowe",
+    "Barrier Care": "Ochrona Bariery",
+    "Anti-Aging": "Przeciwstarzeniowe",
+    "Dark Spot Care": "Na Przebarwienia",
+    "Soothing": "Kojące",
+    "Firming": "Ujędrniające",
+    "Pore Care": "Na Pory",
+    "Antioxidant": "Antyoksydacyjne"
+  },
+  "CheckoutPage": {
+    "stepCart": "Koszyk",
+    "stepShipping": "Dostawa",
+    "stepPayment": "Płatność",
+    "contactInformation": "Dane Kontaktowe",
+    "emailPlaceholder": "ty@przyklad.pl",
+    "newsOptIn": "Wysyłajcie mi wiadomości o nowościach i ofertach od LUMERA",
+    "shippingAddress": "Adres Dostawy",
+    "fullNamePlaceholder": "Imię i nazwisko",
+    "phonePlaceholder": "Telefon (opcjonalnie)",
+    "line1Placeholder": "Adres (linia 1)",
+    "line2Placeholder": "Adres (linia 2, opcjonalnie)",
+    "cityPlaceholder": "Miasto",
+    "statePlaceholder": "Województwo",
+    "postalCodePlaceholder": "Kod pocztowy",
+    "countryPlaceholder": "Kraj",
+    "continueToPayment": "Przejdź do Płatności",
+    "paymentMethod": "Metoda Płatności",
+    "cashOnDelivery": "Płatność przy Odbiorze",
+    "payOnline": "Płatność Online — wkrótce",
+    "back": "Wstecz",
+    "placingOrder": "Składanie zamówienia…",
+    "placeOrder": "Złóż Zamówienie · {price}",
+    "orderSummary": "Podsumowanie Zamówienia",
+    "subtotal": "Suma częściowa ({count} szt.)",
+    "shipping": "Dostawa",
+    "free": "Za darmo",
+    "total": "Razem",
+    "trustClean": "Wykonane z troską, z bezpiecznych składników.",
+    "trustSecure": "Twoje dane są chronione szyfrowaniem.",
+    "trustReturns": "30-dniowy łatwy zwrot.",
+    "orderConfirmedTitle": "Zamówienie potwierdzone",
+    "orderConfirmedBody": "Dziękujemy! Twoje zamówienie {orderId} na kwotę {total} jest przetwarzane.",
+    "continueShoppingCta": "Kontynuuj zakupy",
+    "cartEmpty": "Twój koszyk jest pusty.",
+    "browseSerums": "Przeglądaj serum",
+    "checkoutFailed": "Finalizacja zamówienia nie powiodła się"
+  }
+}

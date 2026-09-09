@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import { SERUM_TYPES } from "@/app/lib/constants";
 import { getProducts, formatPrice, type Product } from "@/app/lib/api";
 import ProductVisual from "@/app/components/ProductVisual";
+import LocaleSwitcher from "@/app/components/LocaleSwitcher";
+import { Link, useRouter } from "@/i18n/navigation";
 import {
   ArrowRightIcon,
   CartIcon,
@@ -17,6 +18,8 @@ import {
 } from "@/app/components/icons";
 
 export default function Navbar() {
+  const t = useTranslations("Navbar");
+  const tType = useTranslations("SerumTypes");
   const { count } = useCart();
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -68,7 +71,10 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-secondary/60 bg-background/95 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-[1420px] items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          className={`items-center gap-2 ${searchOpen ? "hidden sm:flex" : "flex"}`}
+        >
           <span className="font-heading text-2xl font-semibold tracking-tight text-primary-dark">
             LUMERA
           </span>
@@ -76,11 +82,11 @@ export default function Navbar() {
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-foreground/70 sm:flex">
           <Link href="/shop" className="transition-colors hover:text-primary-dark">
-            Shop
+            {t("shop")}
           </Link>
           <div className="group relative">
             <button className="flex items-center gap-1.5 transition-colors hover:text-primary-dark">
-              Skincare
+              {t("skincare")}
               <ChevronDownIcon className="h-3 w-3 transition-transform duration-200 group-hover:rotate-180" />
             </button>
             <div className="invisible absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 translate-y-1 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
@@ -93,7 +99,7 @@ export default function Navbar() {
                       className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-foreground/70 transition-colors hover:bg-secondary/40 hover:text-primary-dark"
                     >
                       <LeafIcon className="h-3 w-3 shrink-0 text-primary" />
-                      {type}
+                      {tType(type)}
                     </Link>
                   ))}
                 </div>
@@ -101,21 +107,21 @@ export default function Navbar() {
                   href="/shop"
                   className="flex items-center justify-between border-t border-secondary/60 bg-secondary/20 px-5 py-3 text-sm font-semibold text-primary-dark transition-colors hover:bg-secondary/30"
                 >
-                  View all serums <ArrowRightIcon className="h-3 w-3" />
+                  {t("viewAllSerums")} <ArrowRightIcon className="h-3 w-3" />
                 </Link>
               </div>
             </div>
           </div>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className={`flex items-center gap-2 ${searchOpen ? "flex-1 sm:flex-none" : ""}`}>
           <div
             ref={searchRef}
-            className="relative"
+            className={`relative h-10 ${searchOpen ? "flex-1 sm:flex-none sm:w-72" : "w-10"}`}
           >
             <div
-              className={`flex items-center overflow-hidden rounded-full transition-all duration-300 ${
-                searchOpen ? "w-56 bg-secondary/40 pl-3 pr-1 sm:w-72" : "w-10"
+              className={`absolute inset-y-0 right-0 flex items-center overflow-hidden rounded-full transition-all duration-300 ${
+                searchOpen ? "w-full bg-secondary/40 pl-3 pr-1 sm:w-72" : "w-10"
               }`}
             >
               {searchOpen ? (
@@ -126,13 +132,13 @@ export default function Navbar() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => e.key === "Escape" && setSearchOpen(false)}
-                    placeholder="Search serums, ingredients…"
+                    placeholder={t("searchPlaceholder")}
                     className="h-9 w-full bg-transparent text-sm outline-none placeholder:text-foreground/40"
                   />
                   <button
                     type="button"
                     onClick={() => setSearchOpen(false)}
-                    aria-label="Close search"
+                    aria-label={t("closeSearch")}
                     className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-foreground/50 transition-colors hover:bg-secondary/60 hover:text-foreground"
                   >
                     <CloseIcon className="h-3.5 w-3.5" />
@@ -141,7 +147,7 @@ export default function Navbar() {
               ) : (
                 <button
                   onClick={() => setSearchOpen(true)}
-                  aria-label="Search"
+                  aria-label={t("search")}
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-secondary/40"
                 >
                   <SearchIcon className="h-5 w-5" />
@@ -182,7 +188,7 @@ export default function Navbar() {
                   </ul>
                 ) : (
                   <p className="px-4 py-4 text-sm text-foreground/50">
-                    No serums match &ldquo;{query}&rdquo;.
+                    {t("noResults", { query })}
                   </p>
                 )}
               </div>
@@ -190,8 +196,8 @@ export default function Navbar() {
           </div>
           <Link
             href="/cart"
-            aria-label="Cart"
-            className="relative flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-secondary/40"
+            aria-label={t("cart")}
+            className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-secondary/40"
           >
             <CartIcon className="h-5 w-5" />
             {count > 0 && (
@@ -200,6 +206,7 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+          <LocaleSwitcher />
         </div>
       </div>
     </header>

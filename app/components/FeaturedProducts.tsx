@@ -1,9 +1,11 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { getProducts } from "@/app/lib/api";
 import ProductCard from "@/app/components/ProductCard";
+import { Link } from "@/i18n/navigation";
 import { ArrowRightIcon } from "@/app/components/icons";
 
 export default async function FeaturedProducts() {
+  const t = await getTranslations("FeaturedProducts");
   const products = await getProducts({ sort: "-created_at" }).catch(() => []);
   const featured = products.slice(0, 12);
 
@@ -12,17 +14,17 @@ export default async function FeaturedProducts() {
       <div className="mb-10 flex items-end justify-between">
         <div>
           <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground">
-            Featured Products
+            {t("title")}
           </h2>
           <p className="mt-2 text-foreground/60">
-            Targeted serums formulated for visible results.
+            {t("subtitle")}
           </p>
         </div>
         <Link
           href="/shop"
           className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-primary-dark hover:underline sm:flex"
         >
-          View all <ArrowRightIcon aria-hidden className="h-3 w-3" />
+          {t("viewAll")} <ArrowRightIcon aria-hidden className="h-3 w-3" />
         </Link>
       </div>
 
@@ -36,7 +38,7 @@ export default async function FeaturedProducts() {
         href="/shop"
         className="mt-8 flex items-center justify-center gap-1 text-sm font-semibold text-primary-dark hover:underline sm:hidden"
       >
-        View all <ArrowRightIcon aria-hidden className="h-3 w-3" />
+        {t("viewAll")} <ArrowRightIcon aria-hidden className="h-3 w-3" />
       </Link>
     </section>
   );

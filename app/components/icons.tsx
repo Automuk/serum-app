@@ -16,6 +16,7 @@ import {
   FaListUl,
   FaPlus,
   FaTimes,
+  FaGlobe,
 } from "react-icons/fa";
 
 export const SearchIcon: IconType = FaSearch;
@@ -34,3 +35,4 @@ export const GridIcon: IconType = FaThLarge;
 export const ListIcon: IconType = FaListUl;
 export const PlusIcon: IconType = FaPlus;
 export const CloseIcon: IconType = FaTimes;
+export const GlobeIcon: IconType = FaGlobe;

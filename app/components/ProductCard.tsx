@@ -1,12 +1,14 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useCart } from "@/app/context/CartContext";
 import ProductVisual from "@/app/components/ProductVisual";
 import { PlusIcon } from "@/app/components/icons";
 import { formatPrice, type Product } from "@/app/lib/api";
+import { Link } from "@/i18n/navigation";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations("ProductCard");
   const { add } = useCart();
 
   return (
@@ -27,7 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className="relative flex flex-1 flex-col p-5">
         <button
           onClick={() => add(product)}
-          aria-label={`Add ${product.name} to cart`}
+          aria-label={t("addToCart", { name: product.name })}
           className="absolute -top-6 right-5 flex h-11 w-11 items-center justify-center rounded-full bg-primary-dark text-background shadow-md transition-colors hover:bg-primary"
         >
           <PlusIcon className="h-4.5 w-4.5" />

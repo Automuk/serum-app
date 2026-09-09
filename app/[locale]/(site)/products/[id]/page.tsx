@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import { getProduct, formatPrice, type Product } from "@/app/lib/api";
@@ -14,6 +15,8 @@ export default function ProductDetail({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const t = useTranslations("ProductDetail");
+  const tType = useTranslations("SerumTypes");
   const { id } = use(params);
   const { add } = useCart();
   const [product, setProduct] = useState<Product | null>(null);
@@ -26,7 +29,7 @@ export default function ProductDetail({
     let active = true;
     getProduct(id)
       .then((data) => active && setProduct(data))
-      .catch((err) => active && setError(err.message ?? "Not found"))
+      .catch((err) => active && setError(err.message ?? t("notFound")))
       .finally(() => active && setLoading(false));
     return () => {
       active = false;
@@ -46,9 +49,9 @@ export default function ProductDetail({
   if (error || !product) {
     return (
       <div className="mx-auto max-w-[1420px] px-6 py-24 text-center text-foreground/60">
-        {error ?? "Product not found."}{" "}
+        {error ?? t("notFound")}{" "}
         <Link href="/shop" className="underline">
-          Back to shop
+          {t("backToShop")}
         </Link>
       </div>
     );
@@ -64,11 +67,11 @@ export default function ProductDetail({
     <div>
       <div className="mx-auto max-w-[1420px] px-6 pt-8 text-xs text-foreground/50">
         <Link href="/" className="hover:text-primary-dark">
-          Home
+          {t("home")}
         </Link>{" "}
         /{" "}
         <Link href="/shop" className="hover:text-primary-dark">
-          Shop
+          {t("shop")}
         </Link>{" "}
         / <span className="text-foreground/70">{product.name}</span>
       </div>
@@ -90,7 +93,7 @@ export default function ProductDetail({
 
           <div className="flex flex-col">
             <span className="text-sm font-medium uppercase tracking-wide text-foreground/40">
-              {product.serum_type}
+              {tType(product.serum_type)}
             </span>
             <h1 className="font-heading mt-2 text-3xl font-semibold tracking-tight text-foreground">
               {product.name}
@@ -105,18 +108,18 @@ export default function ProductDetail({
 
             <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-foreground/70">
               <span className="flex items-center gap-2">
-                <LeafIcon className="h-5 w-5 text-primary-dark" /> Clean Ingredients
+                <LeafIcon className="h-5 w-5 text-primary-dark" /> {t("cleanIngredients")}
               </span>
               <span className="flex items-center gap-2">
-                <HeartIcon className="h-5 w-5 text-primary-dark" /> Cruelty Free
+                <HeartIcon className="h-5 w-5 text-primary-dark" /> {t("crueltyFree")}
               </span>
               <span className="flex items-center gap-2">
-                <ShieldIcon className="h-5 w-5 text-primary-dark" /> Dermatologist Tested
+                <ShieldIcon className="h-5 w-5 text-primary-dark" /> {t("dermatologistTested")}
               </span>
             </div>
 
             <div className="mt-6">
-              <h3 className="font-heading text-sm font-semibold text-foreground">Size</h3>
+              <h3 className="font-heading text-sm font-semibold text-foreground">{t("size")}</h3>
               <div className="mt-2 flex gap-2">
                 <span className="rounded-full border border-primary-dark px-4 py-1.5 text-sm text-foreground">
                   {product.size}
@@ -126,7 +129,7 @@ export default function ProductDetail({
 
             <div className="mt-4 flex gap-6 text-sm text-foreground/50">
               <span>
-                {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+                {product.stock > 0 ? t("inStock", { count: product.stock }) : t("outOfStock")}
               </span>
             </div>
 
@@ -151,14 +154,14 @@ export default function ProductDetail({
                 disabled={product.stock <= 0}
                 className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-dark py-3 text-sm font-semibold text-background transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-40"
               >
-                {added ? "Added ✓" : `Add to Cart · ${formatPrice(product.price * qty)}`}
+                {added ? t("added") : t("addToCart", { price: formatPrice(product.price * qty) })}
               </button>
             </div>
 
             <div className="mt-10 flex flex-col gap-8">
               <div>
                 <h3 className="font-heading text-sm font-semibold text-foreground">
-                  Ingredients
+                  {t("ingredients")}
                 </h3>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {product.key_ingredients.map((ing) => (
@@ -174,11 +177,10 @@ export default function ProductDetail({
 
               <div>
                 <h3 className="font-heading text-sm font-semibold text-foreground">
-                  How to Use
+                  {t("howToUse")}
                 </h3>
                 <p className="mt-3 leading-7 text-foreground/70">
-                  Apply 2–3 drops to clean, dry skin morning and night before
-                  moisturizer. Follow with SPF during the day.
+                  {t("howToUseBody")}
                 </p>
               </div>
             </div>

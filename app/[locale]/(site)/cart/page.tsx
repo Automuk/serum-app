@@ -1,32 +1,35 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useCart } from "@/app/context/CartContext";
 import ProductVisual from "@/app/components/ProductVisual";
 import { CloseIcon, LeafIcon, LockIcon, ShieldIcon, ArrowLeftIcon } from "@/app/components/icons";
 import { formatPrice } from "@/app/lib/api";
 
-const TRUST_ITEMS = [
-  { icon: LeafIcon, title: "Clean & Conscious", subtitle: "Thoughtfully made" },
-  { icon: ShieldIcon, title: "Dermatologist Tested", subtitle: "Safe for your skin" },
-  { icon: LockIcon, title: "Secure Checkout", subtitle: "Your data is protected" },
-];
-
 export default function CartPage() {
+  const t = useTranslations("CartPage");
+  const tType = useTranslations("SerumTypes");
   const { lines, subtotal, setQty, remove } = useCart();
+
+  const TRUST_ITEMS = [
+    { icon: LeafIcon, title: t("trustClean"), subtitle: t("trustCleanSub") },
+    { icon: ShieldIcon, title: t("trustDermatologist"), subtitle: t("trustDermatologistSub") },
+    { icon: LockIcon, title: t("trustSecure"), subtitle: t("trustSecureSub") },
+  ];
 
   if (lines.length === 0) {
     return (
       <main className="mx-auto flex max-w-[1420px] flex-1 flex-col items-center justify-center px-6 py-24 text-center">
         <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground">
-          Your Cart
+          {t("title")}
         </h1>
-        <p className="mt-3 text-foreground/60">Your cart is empty.</p>
+        <p className="mt-3 text-foreground/60">{t("empty")}</p>
         <Link
           href="/shop"
           className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-dark px-6 py-3 text-sm font-semibold text-background hover:bg-primary"
         >
-          Continue Shopping
+          {t("continueShopping")}
         </Link>
       </main>
     );
@@ -37,14 +40,14 @@ export default function CartPage() {
       <div className="mb-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="font-heading text-3xl font-semibold tracking-tight text-foreground">
-            Your Cart
+            {t("title")}
           </h1>
           <p className="mt-1 text-sm text-foreground/60">
-            Review your items and proceed to checkout.
+            {t("subtitle")}
           </p>
         </div>
         <Link href="/shop" className="flex items-center gap-1.5 text-sm text-foreground/60 hover:text-primary-dark">
-          <ArrowLeftIcon aria-hidden className="h-3 w-3" /> Continue Shopping
+          <ArrowLeftIcon aria-hidden className="h-3 w-3" /> {t("continueShopping")}
         </Link>
       </div>
 
@@ -68,7 +71,7 @@ export default function CartPage() {
                   {line.product.name}
                 </Link>
                 <p className="text-xs text-foreground/50">
-                  {line.product.size} · {line.product.serum_type}
+                  {line.product.size} · {tType(line.product.serum_type)}
                 </p>
               </div>
               <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-normal">
@@ -92,7 +95,7 @@ export default function CartPage() {
                 </span>
                 <button
                   onClick={() => remove(line.product._id)}
-                  aria-label={`Remove ${line.product.name}`}
+                  aria-label={t("remove", { name: line.product.name })}
                   className="shrink-0 text-foreground/40 hover:text-highlight"
                 >
                   <CloseIcon className="h-4 w-4" />
@@ -116,35 +119,35 @@ export default function CartPage() {
 
         <aside className="h-fit rounded-2xl border border-secondary/60 bg-secondary/20 p-6">
           <h2 className="font-heading mb-4 text-lg font-semibold text-foreground">
-            Order Summary
+            {t("orderSummary")}
           </h2>
           <div className="flex flex-col gap-2 text-sm">
             <div className="flex justify-between">
               <span className="text-foreground/60">
-                Subtotal ({lines.reduce((n, l) => n + l.quantity, 0)} items)
+                {t("subtotal", { count: lines.reduce((n, l) => n + l.quantity, 0) })}
               </span>
               <span className="font-medium text-foreground">{formatPrice(subtotal)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-foreground/60">Shipping</span>
-              <span className="font-medium text-primary-dark">Free</span>
+              <span className="text-foreground/60">{t("shipping")}</span>
+              <span className="font-medium text-primary-dark">{t("free")}</span>
             </div>
           </div>
           <div className="mt-4 flex justify-between border-t border-secondary pt-4 text-base font-semibold text-foreground">
-            <span>Estimated Total</span>
+            <span>{t("estimatedTotal")}</span>
             <span>{formatPrice(subtotal)}</span>
           </div>
 
           <form onSubmit={(e) => e.preventDefault()} className="mt-5 flex gap-2">
             <input
-              placeholder="Enter promo code"
+              placeholder={t("promoPlaceholder")}
               className="h-10 w-full rounded-lg border border-secondary bg-card px-3 text-sm outline-none focus:border-primary"
             />
             <button
               type="submit"
               className="shrink-0 rounded-lg bg-primary-dark px-4 text-sm font-semibold text-background hover:bg-primary"
             >
-              Apply
+              {t("apply")}
             </button>
           </form>
 
@@ -152,7 +155,7 @@ export default function CartPage() {
             href="/checkout"
             className="mt-5 block w-full rounded-full bg-primary-dark py-3 text-center text-sm font-semibold text-background transition-colors hover:bg-primary"
           >
-            Checkout · {formatPrice(subtotal)}
+            {t("checkout", { price: formatPrice(subtotal) })}
           </Link>
         </aside>
       </div>

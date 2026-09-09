@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import ProductVisual from "@/app/components/ProductVisual";
@@ -20,9 +21,8 @@ const EMPTY = {
   country: "Poland",
 };
 
-const STEPS = ["Cart", "Shipping", "Payment"] as const;
-
 export default function Checkout() {
+  const t = useTranslations("CheckoutPage");
   const { lines, subtotal, clear } = useCart();
   const [step, setStep] = useState<1 | 2>(1);
   const [form, setForm] = useState(EMPTY);
@@ -30,6 +30,8 @@ export default function Checkout() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [order, setOrder] = useState<Order | null>(null);
+
+  const STEPS = [t("stepCart"), t("stepShipping"), t("stepPayment")];
 
   const update = (key: keyof typeof EMPTY, value: string | boolean) =>
     setForm((f) => ({ ...f, [key]: value }));
@@ -63,7 +65,7 @@ export default function Checkout() {
       setOrder(created);
       clear();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Checkout failed");
+      setError(err instanceof Error ? err.message : t("checkoutFailed"));
     } finally {
       setSubmitting(false);
     }
@@ -74,17 +76,19 @@ export default function Checkout() {
       <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center px-6 py-24 text-center">
         <div className="mb-4 text-4xl">✓</div>
         <h1 className="font-heading text-2xl font-semibold text-foreground">
-          Order confirmed
+          {t("orderConfirmedTitle")}
         </h1>
         <p className="mt-2 text-foreground/60">
-          Thank you! Your order <code>{order._id}</code> totalling{" "}
-          {formatPrice(order.total)} is being processed.
+          {t("orderConfirmedBody", {
+            orderId: order._id,
+            total: formatPrice(order.total),
+          })}
         </p>
         <Link
           href="/"
           className="mt-8 inline-block rounded-full bg-primary-dark px-6 py-3 text-sm font-semibold text-background hover:bg-primary"
         >
-          Continue shopping
+          {t("continueShoppingCta")}
         </Link>
       </main>
     );
@@ -93,9 +97,9 @@ export default function Checkout() {
   if (lines.length === 0) {
     return (
       <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center px-6 py-24 text-center text-foreground/60">
-        Your cart is empty.{" "}
+        {t("cartEmpty")}{" "}
         <Link href="/shop" className="underline">
-          Browse serums
+          {t("browseSerums")}
         </Link>
       </main>
     );
@@ -141,12 +145,12 @@ export default function Checkout() {
           <form onSubmit={goToPayment} className="flex flex-col gap-6">
             <div>
               <h2 className="font-heading mb-3 text-lg font-semibold text-foreground">
-                Contact Information
+                {t("contactInformation")}
               </h2>
               <input
                 required
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
                 value={form.email}
                 onChange={(e) => update("email", e.target.value)}
                 className={field}
@@ -158,25 +162,25 @@ export default function Checkout() {
                   onChange={(e) => update("news", e.target.checked)}
                   className="accent-[color:var(--sage-green)]"
                 />
-                Email me with news and offers from LUMERA
+                {t("newsOptIn")}
               </label>
             </div>
 
             <div>
               <h2 className="font-heading mb-3 text-lg font-semibold text-foreground">
-                Shipping Address
+                {t("shippingAddress")}
               </h2>
               <div className="flex flex-col gap-3">
                 <div className="grid grid-cols-2 gap-3">
                   <input
                     required
-                    placeholder="Full name"
+                    placeholder={t("fullNamePlaceholder")}
                     value={form.full_name}
                     onChange={(e) => update("full_name", e.target.value)}
                     className={field}
                   />
                   <input
-                    placeholder="Phone (optional)"
+                    placeholder={t("phonePlaceholder")}
                     value={form.phone}
                     onChange={(e) => update("phone", e.target.value)}
                     className={field}
@@ -184,13 +188,13 @@ export default function Checkout() {
                 </div>
                 <input
                   required
-                  placeholder="Address line 1"
+                  placeholder={t("line1Placeholder")}
                   value={form.line1}
                   onChange={(e) => update("line1", e.target.value)}
                   className={field}
                 />
                 <input
-                  placeholder="Address line 2 (optional)"
+                  placeholder={t("line2Placeholder")}
                   value={form.line2}
                   onChange={(e) => update("line2", e.target.value)}
                   className={field}
@@ -198,21 +202,21 @@ export default function Checkout() {
                 <div className="grid grid-cols-3 gap-3">
                   <input
                     required
-                    placeholder="City"
+                    placeholder={t("cityPlaceholder")}
                     value={form.city}
                     onChange={(e) => update("city", e.target.value)}
                     className={field}
                   />
                   <input
                     required
-                    placeholder="State/Province"
+                    placeholder={t("statePlaceholder")}
                     value={form.state}
                     onChange={(e) => update("state", e.target.value)}
                     className={field}
                   />
                   <input
                     required
-                    placeholder="ZIP/Postal code"
+                    placeholder={t("postalCodePlaceholder")}
                     value={form.postal_code}
                     onChange={(e) => update("postal_code", e.target.value)}
                     className={field}
@@ -220,7 +224,7 @@ export default function Checkout() {
                 </div>
                 <input
                   required
-                  placeholder="Country"
+                  placeholder={t("countryPlaceholder")}
                   value={form.country}
                   onChange={(e) => update("country", e.target.value)}
                   className={field}
@@ -232,14 +236,14 @@ export default function Checkout() {
               type="submit"
               className="flex items-center justify-center gap-2 rounded-full bg-primary-dark py-3 text-sm font-semibold text-background transition-colors hover:bg-primary"
             >
-              Continue to Payment <ArrowRightIcon aria-hidden className="h-3.5 w-3.5" />
+              {t("continueToPayment")} <ArrowRightIcon aria-hidden className="h-3.5 w-3.5" />
             </button>
           </form>
         ) : (
           <div className="flex flex-col gap-6">
             <div>
               <h2 className="font-heading mb-3 text-lg font-semibold text-foreground">
-                Payment Method
+                {t("paymentMethod")}
               </h2>
               <div className="flex flex-col gap-3">
                 <label
@@ -253,11 +257,11 @@ export default function Checkout() {
                     onChange={() => setPayment("cod")}
                     className="accent-[color:var(--deep-forest)]"
                   />
-                  Cash on Delivery
+                  {t("cashOnDelivery")}
                 </label>
                 <label className="flex cursor-not-allowed items-center gap-3 rounded-lg border border-secondary p-4 text-sm text-foreground/40">
                   <input type="radio" disabled />
-                  Pay Online — coming soon
+                  {t("payOnline")}
                 </label>
               </div>
             </div>
@@ -273,14 +277,14 @@ export default function Checkout() {
                 onClick={() => setStep(1)}
                 className="flex items-center justify-center gap-2 rounded-full border border-secondary px-6 py-3 text-sm font-semibold text-foreground/70 hover:border-primary"
               >
-                <ArrowLeftIcon aria-hidden className="h-3.5 w-3.5" /> Back
+                <ArrowLeftIcon aria-hidden className="h-3.5 w-3.5" /> {t("back")}
               </button>
               <button
                 onClick={placeOrder}
                 disabled={submitting}
                 className="flex-1 rounded-full bg-primary-dark py-3 text-sm font-semibold text-background transition-colors hover:bg-primary disabled:opacity-50"
               >
-                {submitting ? "Placing order…" : `Place Order · ${formatPrice(subtotal)}`}
+                {submitting ? t("placingOrder") : t("placeOrder", { price: formatPrice(subtotal) })}
               </button>
             </div>
           </div>
@@ -288,7 +292,7 @@ export default function Checkout() {
 
         <aside className="h-fit rounded-2xl border border-secondary/60 bg-secondary/20 p-6 lg:sticky lg:top-24">
           <h2 className="font-heading mb-4 text-lg font-semibold text-foreground">
-            Order Summary
+            {t("orderSummary")}
           </h2>
           <ul className="flex flex-col gap-4">
             {lines.map((l) => (
@@ -312,28 +316,28 @@ export default function Checkout() {
           </ul>
           <div className="mt-4 flex flex-col gap-2 border-t border-secondary pt-4 text-sm">
             <div className="flex justify-between text-foreground/60">
-              <span>Subtotal ({lines.length} items)</span>
+              <span>{t("subtotal", { count: lines.length })}</span>
               <span>{formatPrice(subtotal)}</span>
             </div>
             <div className="flex justify-between text-foreground/60">
-              <span>Shipping</span>
-              <span className="text-primary-dark">Free</span>
+              <span>{t("shipping")}</span>
+              <span className="text-primary-dark">{t("free")}</span>
             </div>
             <div className="flex justify-between text-base font-semibold text-foreground">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span>{formatPrice(subtotal)}</span>
             </div>
           </div>
 
           <div className="mt-6 flex flex-col gap-3 border-t border-secondary pt-4 text-xs text-foreground/60">
             <span className="flex items-center gap-2">
-              <LeafIcon className="h-4 w-4 text-primary-dark" /> Thoughtfully made with safe ingredients.
+              <LeafIcon className="h-4 w-4 text-primary-dark" /> {t("trustClean")}
             </span>
             <span className="flex items-center gap-2">
-              <LockIcon className="h-4 w-4 text-primary-dark" /> Your data is protected with encryption.
+              <LockIcon className="h-4 w-4 text-primary-dark" /> {t("trustSecure")}
             </span>
             <span className="flex items-center gap-2">
-              <ShieldIcon className="h-4 w-4 text-primary-dark" /> 30-day easy returns.
+              <ShieldIcon className="h-4 w-4 text-primary-dark" /> {t("trustReturns")}
             </span>
           </div>
         </aside>
